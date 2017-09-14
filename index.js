@@ -1,35 +1,41 @@
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 8080 },() => {
+	console.log('服务器启动');
+});
 
 wss.on('connection', (ws, req) => {
-	console.log('----------------',	req.connection.remoteAddress);
+	console.log('ip:',	req.connection.remoteAddress);
 	//接收消息
 	ws.on('message', (message , req) => {
 		console.log('received: %s', message);
 	});
 	ws.on('error', (params) => {
-		console.log('----------------');
+		console.log('error:',params);
 	});
 
 	ws.on('open',  (params) => {
-		console.log('----------------');
+		console.log('open:',params);
 	});
 
 	ws.on('close', (params) => {
-		console.log('-----------');
+		console.log('close:',params);
 	});
 
 	//发送消息
-	ws.send('连接成功');
+	ws.send('连接成功',(error) => {
+		console.log('error:',error);
+	});
 });
 
 // 广播
 function broadcast() {
-	wss.clients.forEach((client) => {
-		if (client.readyState === WebSocket.OPEN) {
-			client.send('主动广播');
+	wss.clients.forEach((ws) => {
+		if (ws.readyState === WebSocket.OPEN) {
+			ws.send('主动广播');
 		}
 	});
 };
 setInterval(broadcast, 5 * 1000);
 
+//终结
+//ws.terminate();
