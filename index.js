@@ -1,14 +1,15 @@
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 },() => {
+const wss = new WebSocket.Server({ port: 8080 }, () => {
 	console.log('服务器启动');
 });
 
 wss.on('connection', (ws, req) => {
 	console.log('ip:',	req.connection.remoteAddress);
-	//接收消息
+
 	ws.on('message', (message , req) => {
 		console.log('received: %s', message);
 	});
+	
 	ws.on('error', (params) => {
 		console.log('error:',params);
 	});
@@ -23,7 +24,7 @@ wss.on('connection', (ws, req) => {
 
 	//发送消息
 	ws.send('连接成功',(error) => {
-		console.log('error:',error);
+		if (error) console.log('发送 error:', error);
 	});
 });
 
