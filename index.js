@@ -32,7 +32,7 @@ wss.on('connection', (ws, req) => {
 function broadcast() {
 	wss.clients.forEach((ws) => {
 		if (ws.readyState === WebSocket.OPEN) {
-			ws.send('主动广播');
+			ws.send('主动广播'+wss.clients.size);
 		}
 	});
 };
@@ -40,3 +40,4 @@ setInterval(broadcast, 5 * 1000);
 
 //终结
 //ws.terminate();
+
