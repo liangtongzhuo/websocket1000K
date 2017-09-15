@@ -6,8 +6,8 @@ const wss = new WebSocket.Server({ port: 8080 }, () => {
 wss.on('connection', (ws, req) => {
 	console.log('ip:',	req.connection.remoteAddress);
 
-	ws.on('message', (message , req) => {
-		console.log('received: %s', message);
+	ws.on('message', (message ) => {
+		console.log('message:', message);
 	});
 	
 	ws.on('error', (params) => {
@@ -27,6 +27,20 @@ wss.on('connection', (ws, req) => {
 		if (error) console.log('发送 error:', error);
 	});
 });
+
+wss.on('headers', (params, req) => {
+	console.log('headers:', params);
+	// console.log('req:', req);
+});
+
+wss.on('error', (params) => {
+	console.log('服务器启动 error:', params);
+});
+
+wss.on('listening', (params) => {
+	console.log('listening');
+});
+
 
 // 广播
 function broadcast() {
