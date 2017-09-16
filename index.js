@@ -1,3 +1,4 @@
+'use strict'
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8080 }, () => {
 	console.log('服务器启动');
@@ -22,6 +23,18 @@ wss.on('connection', (ws, req) => {
 		console.log('close:',params);
 	});
 
+	ws.on('headers', (params) => {
+		console.log('headers:', params);
+	});
+
+	ws.on('ping', (params) => {
+		console.log('ping:', params);
+	});
+
+	ws.on('pong', (params) => {
+		console.log('pong:', params);
+	});
+
 	//发送消息
 	ws.send('连接成功',(error) => {
 		if (error) console.log('发送 error:', error);
@@ -34,11 +47,11 @@ wss.on('headers', (params, req) => {
 });
 
 wss.on('error', (params) => {
-	console.log('服务器启动 error:', params);
+	console.log('服务器 error:', params);
 });
 
 wss.on('listening', (params) => {
-	console.log('listening');
+	console.log('listening:',params);
 });
 
 

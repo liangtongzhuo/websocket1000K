@@ -11,10 +11,11 @@ function getWs() {
         ws.onopen = function (e) {  
             console.log("open:", e);  
         }  
-        ws.onmessage = function (event) {  
+        ws.onmessage = function (e) {  
             var div = document.createElement("div");  
-            div.textContent = event.data;  
+            div.textContent = e.data;  
             document.body.appendChild(div);  
+            console.log('----------',ws);
         }  
         ws.onclose = function (e) {  
             console.log("close:", e);  
