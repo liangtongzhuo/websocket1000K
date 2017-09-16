@@ -5,35 +5,50 @@ const wss = new WebSocket.Server({ port: 8080 }, () => {
 	console.log('服务器启动');
 });
 
+wss.on('headers', (params, req) => {
+  console.log('headers:', params);
+  // console.log('req:', req);
+});
+
+wss.on('error', (params) => {
+  console.log('服务器 error:', params);
+});
+
+wss.on('listening', (params) => {
+  console.log('listening:', params);
+});
+
+
+// socket
 wss.on('connection', (ws, req) => {
-	console.log('ip:',	req.connection.remoteAddress);
+  console.log('wsIp:',	req.connection.remoteAddress);
 
 	ws.on('message', (message ) => {
-		console.log('message:', message);
+		console.log('wsMessage:', message);
 	});
 	
 	ws.on('error', (params) => {
-		console.log('error:',params);
+		console.log('wsError:',params);
 	});
 
 	ws.on('open',  (params) => {
-		console.log('open:',params);
+		console.log('wsOpen:',params);
 	});
 
 	ws.on('close', (params) => {
-		console.log('close:',params);
+		console.log('wsClose:',params);
 	});
 
 	ws.on('headers', (params) => {
-		console.log('headers:', params);
+    console.log('wsHeaders:', params);
 	});
 
 	ws.on('ping', (params) => {
-		console.log('ping:', params);
+		console.log('wsPing:', params);
 	});
 
 	ws.on('pong', (params) => {
-		console.log('pong:', params);
+		console.log('wsPong:', params);
 	});
 
 	//发送消息
@@ -42,18 +57,6 @@ wss.on('connection', (ws, req) => {
 	});
 });
 
-wss.on('headers', (params, req) => {
-	console.log('headers:', params);
-	// console.log('req:', req);
-});
-
-wss.on('error', (params) => {
-	console.log('服务器 error:', params);
-});
-
-wss.on('listening', (params) => {
-	console.log('listening:',params);
-});
 
 
 // 广播
