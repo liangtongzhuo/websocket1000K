@@ -15,7 +15,6 @@ function getWs() {
             var div = document.createElement("div");  
             div.textContent = e.data;  
             document.body.appendChild(div);  
-            console.log('----------',ws);
         }  
         ws.onclose = function (e) {  
             console.log("close:", e);  
@@ -40,7 +39,7 @@ function sendWs(){
 
 //关闭TCP连接
 // ws.close(); 
-//状态
+//获取状态
 //ws.readyState
 </script>  
 </head>  

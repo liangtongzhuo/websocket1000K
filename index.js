@@ -1,4 +1,5 @@
 'use strict'
+
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8080 }, () => {
 	console.log('服务器启动');
@@ -59,7 +60,7 @@ wss.on('listening', (params) => {
 function broadcast() {
 	wss.clients.forEach((ws) => {
 		if (ws.readyState === WebSocket.OPEN) {
-			ws.send('主动广播'+wss.clients.size);
+      ws.send('主动广播'+wss.clients.size);
 		}
 	});
 };
