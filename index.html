@@ -7,8 +7,8 @@
     <script>
         let ws
         function getWs() {
-            ws = new WebSocket('ws://' + window.location.hostname + ':8080');
-            // ws = new WebSocket('ws://101.201.67.198:80?user=123');
+            // ws = new WebSocket('ws://' + window.location.hostname + ':8080');
+            ws = new WebSocket('ws://127.0.0.1:8080?user=123');
             ws.onopen = function (e) {
                 console.log('open:', e);
             }
