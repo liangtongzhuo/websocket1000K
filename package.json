@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/liangtongzhuo/websocket1000K#readme",
   "dependencies": {
+    "koa": "^2.3.0",
     "ws": "^3.1.0"
   }
 }

@@ -1,9 +1,19 @@
 'use strict'
 
-const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 80 }, () => {
+const Koa = require('koa');
+const ws = require('ws');
+const app = new Koa();
+
+app.use(async (ctx, next) => {
+  await next();
+  ctx.response.type = 'text/html';
+  ctx.response.body = '<h1>Hello, koa2!</h1>';
+})
+
+const server = app.listen(8080, () => {
   console.log('服务器启动');
 });
+const wss = new ws.Server({ server });
 
 wss.on('headers', (params, req) => {
   // console.log('headers:', params);
