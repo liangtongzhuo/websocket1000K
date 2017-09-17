@@ -1,7 +1,7 @@
 'use strict'
 
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 }, () => {
+const wss = new WebSocket.Server({ port: 80 }, () => {
 	console.log('服务器启动');
 });
 
