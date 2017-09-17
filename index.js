@@ -25,7 +25,9 @@ wss.on('connection', (ws, req) => {
   console.log('url:', req.url);
 
 	ws.on('message', (message ) => {
-		console.log('wsMessage:', message);
+    console.log('wsMessage:', message);
+    //广播
+    broadcast(message);
 	});
 	
 	ws.on('error', (params) => {
@@ -59,10 +61,10 @@ wss.on('connection', (ws, req) => {
 });
 
 // 广播
-function broadcast() {
+function broadcast(message) {
 	wss.clients.forEach((ws) => {
 		if (ws.readyState === WebSocket.OPEN) {
-      ws.send('主动广播'+wss.clients.size);
+      ws.send('主动广播'+wss.clients.size+','+message);
 		}
 	});
 };
