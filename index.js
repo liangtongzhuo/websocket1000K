@@ -20,7 +20,8 @@ wss.on('listening', (params) => {
 
 // socket
 wss.on('connection', (ws, req) => {
-  console.log('有 Socket 来了,ip:', req.headers.host);
+  console.log('有 Socket 来了');
+  console.log('ip:', req.headers.host);
   console.log('url:', req.url);
 
 	ws.on('message', (message ) => {
