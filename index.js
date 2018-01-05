@@ -67,13 +67,14 @@ function broadcast(message) {
       if (message) {
         ws.send('用户:' + message);
       } else {
-        ws.send('主动广播:' + wss.clients.size);
+        // ws.send('主动广播:' + wss.clients.size);
+        ws.send('主动广播:' + new Date());        
       }
     }
   });
 };
 
-setInterval(broadcast, 5 * 1000);
+setInterval(broadcast, 5);
 
 //终结
 //ws.terminate();
