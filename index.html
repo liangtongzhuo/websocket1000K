@@ -14,7 +14,7 @@
             }
             ws.onmessage = function (e) {
                 var div = document.createElement('div');
-                div.textContent = e.data + new Date();
+                div.textContent = e.data+ '--' + new Date().getMilliseconds() + '--';
                 document.body.appendChild(div);
             }
             ws.onclose = function (e) {
