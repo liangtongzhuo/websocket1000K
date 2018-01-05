@@ -68,7 +68,7 @@ function broadcast(message) {
         ws.send('用户:' + message);
       } else {
         // ws.send('主动广播:' + wss.clients.size);
-        ws.send(new Date());        
+        ws.send('' + new Date());
       }
     }
   });
